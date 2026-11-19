@@ -127,6 +127,11 @@ export function graphEditor({
     view.update({
       graph,
       positions,
+      // reset every decoration, so nothing from an earlier redraw lingers
+      edgeClass: undefined,
+      vertexLabel: undefined,
+      edgeLabel: undefined,
+      ghostEdges: [],
       ...extra,
       vertexClass: (v) => `${baseVertexClass(v)}${v === selected ? ' is-selected' : ''}`,
     });

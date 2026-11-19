@@ -10,6 +10,7 @@ const OPTIONS = {
   throwOnError: false,
   macros: {
     '\\N': '\\mathbb{N}',
+    '\\R': '\\mathbb{R}',
     '\\eps': '\\varepsilon',
     // \pairs{V} = set of all unordered pairs of distinct elements of V
     '\\pairs': '\\binom{#1}{2}',

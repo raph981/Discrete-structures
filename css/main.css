@@ -327,7 +327,7 @@ dfn, .term { font-style: normal; font-weight: 700; }
 .graph__edge { stroke: var(--edge); stroke-width: 2.5; stroke-linecap: round; transition: opacity 0.15s; }
 .graph__edge--ghost { stroke-dasharray: 6 5; opacity: 0.6; }
 .graph__edge-hit { stroke: transparent; stroke-width: 16; cursor: pointer; }
-.graph__edge-label { fill: var(--text-muted); font-size: 12px; text-anchor: middle; }
+.graph__edge-label { fill: var(--text); font-size: 13px; font-weight: 600; text-anchor: middle; paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
 .graph__vertex { cursor: pointer; }
 .graph__vertex circle { fill: var(--surface); stroke: var(--c); stroke-width: 2.5; transition: opacity 0.15s; }
 .graph__vertex text {
@@ -410,3 +410,69 @@ dfn, .term { font-style: normal; font-weight: 700; }
   .box, .exercise { padding: 0.8rem 0.9rem; }
   .widget { padding: 0.9rem; }
 }
+
+/* Graph states for lectures 2–7 */
+.graph__vertex.in-walk circle { stroke: var(--graph-h); stroke-width: 3; }
+.graph__edge.path-p { stroke: var(--edge); stroke-width: 4.5; }
+.graph__edge.path-q { stroke: var(--ok); stroke-width: 4.5; }
+.graph__edge.in-cycle { stroke-width: 7; stroke-opacity: 0.85; }
+.graph__edge.in-cycle:not(.path-p):not(.path-q):not(.is-incident):not(.is-tree) { stroke: var(--graph-h); }
+.graph__vertex.is-leaf circle { stroke: var(--ok); stroke-width: 3.5; fill: color-mix(in srgb, var(--ok) 15%, var(--surface)); }
+.graph__vertex.in-queue circle { stroke: var(--warn); stroke-width: 4; }
+.graph__vertex.is-reached circle { stroke: var(--edge); fill: color-mix(in srgb, var(--edge) 18%, var(--surface)); }
+.graph__vertex.is-new-vertex circle { stroke-width: 5; }
+.graph__edge.is-tree { stroke: var(--ok); stroke-width: 4.5; }
+.graph__vertex.side-a circle { stroke: var(--series-3); stroke-width: 3; fill: color-mix(in srgb, var(--series-3) 25%, var(--surface)); }
+.graph__vertex.side-b circle { stroke: var(--series-4); stroke-width: 3; fill: color-mix(in srgb, var(--series-4) 25%, var(--surface)); }
+.graph__vertex.is-odd circle { stroke: var(--bad); stroke-width: 4; }
+.graph__vertex.is-removed-x circle { stroke: var(--bad); stroke-dasharray: 4 3; fill: var(--surface-2); opacity: 0.8; }
+.graph__vertex.is-removed-x text { text-decoration: line-through; }
+
+.chip--p { border-color: var(--edge); color: var(--edge); font-weight: 600; }
+.chip--q { border-color: var(--ok); color: var(--ok); font-weight: 600; }
+.comp-chip { display: inline-block; margin: 0 0.3rem 0.3rem 0; padding: 0.1rem 0.5rem; border-radius: 999px; font-family: var(--font-mono); font-size: 0.82rem;
+  border: 2px solid var(--c, var(--border)); background: color-mix(in srgb, var(--c, var(--surface)) 15%, var(--surface)); }
+.comp-chip.color-1 { --c: var(--series-1); } .comp-chip.color-2 { --c: var(--series-2); } .comp-chip.color-3 { --c: var(--series-3); }
+.comp-chip.color-4 { --c: var(--series-4); } .comp-chip.color-5 { --c: var(--series-5); } .comp-chip.color-6 { --c: var(--series-6); }
+.comp-chip.color-7 { --c: #8a6d3b; } .comp-chip.color-8 { --c: #2aa198; }
+
+.walk-seq { font-size: 1.05rem; margin: 0.75rem 0 0.25rem; word-break: break-word; }
+.shortcut-steps li { margin: 0.2rem 0; }
+.algo-state { display: grid; gap: 0.25rem; background: var(--surface-2); border-radius: 8px; padding: 0.6rem 0.8rem; margin: 0.75rem 0; font-size: 0.85rem; word-break: break-word; }
+.halving { word-break: break-word; }
+.adjacency__compact { word-break: break-word; }
+.adjacency__table th { width: 3rem; }
+
+.char-list { display: grid; gap: 0.5rem; align-content: start; }
+.char-row { display: flex; gap: 0.6rem; padding: 0.55rem 0.7rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); }
+.char-row--ok .char-row__mark { color: var(--ok); }
+.char-row--fail { border-color: color-mix(in srgb, var(--bad) 45%, var(--border)); cursor: help; }
+.char-row--fail .char-row__mark { color: var(--bad); }
+.char-row__mark { font-weight: 700; }
+.char-row__detail { color: var(--text-muted); }
+
+.array-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; }
+.array-cell { min-width: 2.6rem; text-align: center; padding: 0.45rem 0.3rem; border-radius: 8px; border: 1px solid var(--border);
+  font-family: var(--font-mono); font-weight: 600; background: var(--surface); transition: all 0.15s; }
+.array-cell.is-pending { color: var(--text-muted); background: var(--surface-2); }
+.array-cell.is-current { border-color: var(--warn); box-shadow: 0 0 0 2px var(--warn); }
+.array-cell.is-leader { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+
+.stepper { margin: 0.75rem 0; }
+.stepper .button-row { margin: 0 0 0.5rem; }
+.stepper__track { display: flex; align-items: center; gap: 0.75rem; }
+.stepper__range { flex: 1; accent-color: var(--accent); }
+.stepper__label { color: var(--text-muted); font-size: 0.85rem; min-width: 7rem; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Plots (core/plot.js) */
+.plot-container { margin-top: 0.5rem; }
+.plot { width: 100%; height: auto; display: block; font-family: var(--font-ui); }
+.plot__grid { stroke: var(--border); stroke-width: 1; }
+.plot__frame { fill: none; stroke: var(--text-muted); stroke-width: 1; }
+.plot__tick { fill: var(--text-muted); font-size: 11px; }
+.plot__axis-label { fill: var(--text); font-size: 12px; font-weight: 500; }
+.plot__line { fill: none; stroke: var(--series-color); stroke-width: 2.2; stroke-linejoin: round; }
+.plot__line--dashed { stroke-dasharray: 5 4; stroke-width: 1.4; opacity: 0.7; }
+.plot-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin: 0 0 0.4rem; padding: 0; font-size: 0.82rem; color: var(--text-muted); }
+.plot-legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.plot-legend__swatch { display: inline-block; width: 18px; height: 3px; border-radius: 2px; background: var(--series-color); }

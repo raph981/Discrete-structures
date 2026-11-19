@@ -68,7 +68,11 @@ export function graphView({
       );
       const label = edgeLabel?.(u, v);
       if (label) {
-        const text = svg('text', { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 - 8, class: 'graph__edge-label' });
+        // place the label beside the midpoint, offset perpendicular to the edge
+        const len = Math.hypot(b.x - a.x, b.y - a.y) || 1;
+        let [nx, ny] = [-(b.y - a.y) / len, (b.x - a.x) / len];
+        if (ny > 0 || (ny === 0 && nx > 0)) [nx, ny] = [-nx, -ny]; // prefer above / left
+        const text = svg('text', { x: (a.x + b.x) / 2 + nx * 11, y: (a.y + b.y) / 2 + ny * 11 + 4, class: 'graph__edge-label' });
         text.textContent = label;
         group.append(text);
       }
